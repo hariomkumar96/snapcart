@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snap Cart — Shop smarter</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">The big Snap sale</div>
+        <h1>Everything you love.<br>One cart away.</h1>
+        <p>Discover top picks, everyday essentials and deals worth a click.</p>
+        <a class="btn btn-yellow" href="#products">Shop now →</a>
+      </div>
+      <div class="hero-art">🛍️</div>
+    </section>
+
+    <section class="promos">
+      <a class="promo promo-1" href="index.html?cat=electronics"><div><h3>Electronics deals</h3><small>Up to 40% off</small></div><span>🎧</span></a>
+      <a class="promo promo-2" href="index.html?cat=fashion"><div><h3>Fashion week</h3><small>Fresh styles daily</small></div><span>👟</span></a>
+      <a class="promo promo-3" href="checkout.html"><div><h3>Use code SNAP10</h3><small>10% off on orders above ₹499</small></div><span>🏷️</span></a>
+    </section>
+
+    <div class="features">
+      <div class="feature"><span style="font-size:25px">🚚</span><div><b>Fast delivery</b><small>Free above ₹499</small></div></div>
+      <div class="feature"><span style="font-size:25px">🔒</span><div><b>Secure checkout</b><small>Cash on delivery or UPI</small></div></div>
+      <div class="feature"><span style="font-size:25px">↩️</span><div><b>Easy returns</b><small>Simple 7-day return policy</small></div></div>
+    </div>
+
+    <section id="products">
+      <div class="section-head">
+        <div>
+          <h2 id="listingTitle">Trending products</h2>
+          <div class="sub" id="resultCount">Loading catalogue…</div>
+        </div>
+        <div class="controls">
+          <select class="input" id="sortSelect" aria-label="Sort products" style="width:auto">
+            <option value="featured">Sort: Featured</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="rating">Top rated</option>
+            <option value="discount">Biggest discount</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filters">
+        <label><span>Brand</span><select class="input" id="brandSelect"><option value="">All brands</option></select></label>
+        <label><span>Min price (₹)</span><input class="input" id="minPrice" type="number" min="0" placeholder="0"></label>
+        <label><span>Max price (₹)</span><input class="input" id="maxPrice" type="number" min="0" placeholder="No limit"></label>
+        <label><span>Min rating</span>
+          <select class="input" id="minRating"><option value="">Any</option><option value="4">4★ & up</option><option value="4.5">4.5★ & up</option></select>
+        </label>
+        <label><span>Min discount</span>
+          <select class="input" id="minDiscount"><option value="">Any</option><option value="20">20% & up</option><option value="40">40% & up</option></select>
+        </label>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-block" id="applyFilters">Apply</button>
+          <button class="btn btn-light" id="resetFilters">Reset</button>
+        </div>
+        <div class="field-error" id="priceError" style="grid-column:1/-1"></div>
+      </div>
+
+      <div class="grid" id="productGrid"></div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

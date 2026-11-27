@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Sign up — Snap Cart</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <main class="container">
+    <div class="panel center-card">
+      <div class="tabs" style="margin-bottom:18px">
+        <button class="tab active" id="tabLogin" type="button">Login</button>
+        <button class="tab" id="tabSignup" type="button">Sign up</button>
+      </div>
+
+      <form id="loginForm" class="form" novalidate>
+        <h2>Welcome back</h2>
+        <p class="muted">Sign in to see your orders and checkout faster.</p>
+        <label><span>Email address</span><input class="input" name="email" type="email" autocomplete="email"><div class="field-error" data-err="email"></div></label>
+        <label style="display:block;margin-top:12px"><span>Password</span><input class="input" name="password" type="password" autocomplete="current-password"><div class="field-error" data-err="password"></div></label>
+        <div class="field-error" data-err="_form"></div>
+        <button class="btn btn-block" type="submit" style="margin-top:14px">Login</button>
+      </form>
+
+      <form id="signupForm" class="form" novalidate style="display:none">
+        <h2>Create your account</h2>
+        <p class="muted">Join Snap Cart in under a minute.</p>
+        <label><span>Full name</span><input class="input" name="name" autocomplete="name"><div class="field-error" data-err="name"></div></label>
+        <label style="display:block;margin-top:12px"><span>Email address</span><input class="input" name="email" type="email" autocomplete="email"><div class="field-error" data-err="email"></div></label>
+        <label style="display:block;margin-top:12px"><span>Mobile number (optional)</span><input class="input" name="phone" placeholder="10-digit mobile"><div class="field-error" data-err="phone"></div></label>
+        <label style="display:block;margin-top:12px"><span>Password</span><input class="input" name="password" type="password" autocomplete="new-password"><div class="field-error" data-err="password"></div></label>
+        <label style="display:block;margin-top:12px"><span>Confirm password</span><input class="input" name="confirm_password" type="password" autocomplete="new-password"><div class="field-error" data-err="confirm_password"></div></label>
+        <div class="field-error" data-err="_form"></div>
+        <button class="btn btn-block" type="submit" style="margin-top:14px">Create account</button>
+      </form>
+    </div>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

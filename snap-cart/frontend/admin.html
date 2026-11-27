@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin dashboard — Snap Cart</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <main class="container">
+    <div class="section-head">
+      <div><h2>Admin dashboard</h2><div class="sub">Sales, catalogue, orders and customers</div></div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="dashboard">Dashboard</button>
+      <button class="tab" data-tab="products">Products</button>
+      <button class="tab" data-tab="categories">Categories</button>
+      <button class="tab" data-tab="orders">Orders</button>
+      <button class="tab" data-tab="customers">Customers</button>
+    </div>
+
+    <!-- Dashboard -->
+    <section id="tab-dashboard">
+      <div class="stats" id="statCards"></div>
+      <div class="chart-grid">
+        <div class="chart-box"><h3>Sales — last 14 days</h3><canvas id="salesChart"></canvas></div>
+        <div class="chart-box"><h3>Sales by category</h3><canvas id="categoryChart"></canvas></div>
+      </div>
+      <div class="chart-box" style="margin-top:14px"><h3>Orders by status</h3><canvas id="statusChart"></canvas></div>
+    </section>
+
+    <!-- Products -->
+    <section id="tab-products" hidden>
+      <div class="section-head" style="margin-top:0">
+        <h3 style="margin:0">Products</h3>
+        <button class="btn" id="newProductBtn">+ Add product</button>
+      </div>
+      <div class="table-wrap"><table class="data">
+        <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Off</th><th>Stock</th><th>Rating</th><th></th></tr></thead>
+        <tbody id="productRows"></tbody>
+      </table></div>
+    </section>
+
+    <!-- Categories -->
+    <section id="tab-categories" hidden>
+      <div class="two-col">
+        <div class="table-wrap"><table class="data">
+          <thead><tr><th>Icon</th><th>Name</th><th>Products</th><th></th></tr></thead>
+          <tbody id="categoryRows"></tbody>
+        </table></div>
+        <form class="panel form" id="categoryForm" novalidate>
+          <h3>Add category</h3>
+          <label><span>Name</span><input class="input" name="name" placeholder="e.g. Toys"><div class="field-error" data-err="name"></div></label>
+          <label style="display:block;margin-top:10px"><span>Icon (emoji)</span><input class="input" name="icon" placeholder="🧸" maxlength="4"></label>
+          <div class="field-error" data-err="_form"></div>
+          <div class="form-actions"><button class="btn" type="submit">Add category</button></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Orders -->
+    <section id="tab-orders" hidden>
+      <div class="section-head" style="margin-top:0">
+        <h3 style="margin:0">Orders</h3>
+        <select class="input" id="orderFilter" style="width:auto">
+          <option value="">All statuses</option>
+          <option>Placed</option><option>Packed</option><option>Shipped</option>
+          <option>Out for Delivery</option><option>Delivered</option><option>Cancelled</option>
+        </select>
+      </div>
+      <div class="table-wrap"><table class="data">
+        <thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Payment</th><th>Status</th><th>Update</th></tr></thead>
+        <tbody id="orderRows"></tbody>
+      </table></div>
+    </section>
+
+    <!-- Customers -->
+    <section id="tab-customers" hidden>
+      <div class="table-wrap"><table class="data">
+        <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Joined</th><th>Orders</th><th>Spent</th></tr></thead>
+        <tbody id="customerRows"></tbody>
+      </table></div>
+    </section>
+  </main>
+
+  <!-- Product add/edit modal -->
+  <div class="overlay" id="productModal">
+    <div class="modal">
+      <div class="modal-head"><h2 id="productModalTitle">Add product</h2><button class="close-x" data-close aria-label="Close">×</button></div>
+      <form id="productForm" class="form" novalidate>
+        <input type="hidden" name="id">
+        <div class="form-grid">
+          <label class="full"><span>Product name</span><input class="input" name="name"><div class="field-error" data-err="name"></div></label>
+          <label><span>Brand</span><input class="input" name="brand"><div class="field-error" data-err="brand"></div></label>
+          <label><span>Category</span><select class="input" name="category_id"></select><div class="field-error" data-err="category_id"></div></label>
+          <label><span>Original price (₹)</span><input class="input" name="original_price" type="number" min="1" step="1"><div class="field-error" data-err="original_price"></div></label>
+          <label><span>Selling price (₹)</span><input class="input" name="price" type="number" min="1" step="1"><div class="field-error" data-err="price"></div></label>
+          <label><span>Stock</span><input class="input" name="stock" type="number" min="0" step="1"><div class="field-error" data-err="stock"></div></label>
+          <label><span>Rating (0–5)</span><input class="input" name="rating" type="number" min="0" max="5" step="0.1"><div class="field-error" data-err="rating"></div></label>
+          <label><span>Emoji</span><input class="input" name="emoji" maxlength="8" placeholder="📦"></label>
+          <label><span>Image URL (optional)</span><input class="input" name="image_url" placeholder="https://..."></label>
+          <label class="full"><span>Description</span><textarea class="input" name="description" rows="3"></textarea></label>
+        </div>
+        <div class="field-error" data-err="_form"></div>
+        <div class="form-actions"><button class="btn" type="submit">Save product</button><button class="btn btn-light" type="button" data-close>Cancel</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="site-footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
